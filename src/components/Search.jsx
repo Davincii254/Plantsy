@@ -1,6 +1,7 @@
 import React from "react";
 
 function Search({searchTerm, setSearchTerm}) {
+  
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };

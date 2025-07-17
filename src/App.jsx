@@ -6,6 +6,7 @@ function App() {
   const [plants, setPlants] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Fetch plants
   useEffect(() => {
     fetch('http://localhost:3000/plants')
       .then(r => r.json())
@@ -15,6 +16,8 @@ function App() {
       .catch((error) => console.error("Error fetching plants:", error));
   }, []);
 
+
+  // Add new Plants
   const handleAddPlant = (newPlant) => {
     setPlants((prevPlants) => [...prevPlants, newPlant]);
 
@@ -39,6 +42,8 @@ function App() {
     });
   };
 
+
+  // Update the stock in the database
   const handleUpdateStock = (plantId, newInStockStatus) => {
     const updatedPlants = plants.map((plant) =>
       plant.id === plantId ? { ...plant, inStock: newInStockStatus } : plant
@@ -65,6 +70,7 @@ function App() {
     });
   };
 
+  // Filter plants
   const filteredPlants = plants.filter((plant) =>
     plant.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -72,7 +78,6 @@ function App() {
   return (
     <div className="app">
       <Header />
-      {/* PlantPage is now rendered directly, no routing involved */}
       <PlantPage
         plants={filteredPlants}
         onAddPlant={handleAddPlant}
